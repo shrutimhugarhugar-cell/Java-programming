@@ -1,0 +1,119 @@
+import java.util.Scanner;
+
+public class ems1 {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static String[] name = new String[100];
+    static int[] age = new int[100];
+    static double[] salary = new double[100];
+    static int count = 0;
+
+    public static void main(String[] args) {
+
+        int choice;
+
+        do {
+            System.out.println("\n===== EMPLOYEE MANAGEMENT SYSTEM =====");
+            System.out.println("1. Create");
+            System.out.println("2. Display");
+            System.out.println("3. Raise Salary");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    createEmployee();
+                    break;
+
+                case 2:
+                    displayEmployee();
+                    break;
+
+                case 3:
+                    raiseSalary();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+
+    // Create Employee
+    static void createEmployee() {
+
+        String continueChoice;
+
+        do {
+            System.out.print("Enter your name: ");
+            name[count] = sc.nextLine();
+
+            System.out.print("Enter your age: ");
+            age[count] = sc.nextInt();
+            sc.nextLine();
+
+            count++;
+
+            System.out.print("Continue (yes/no): ");
+            continueChoice = sc.nextLine();
+
+        } while (continueChoice.equalsIgnoreCase("yes"));
+    }
+
+    // Display Employee
+    static void displayEmployee() {
+
+        if (count == 0) {
+            System.out.println("No employees available.");
+            return;
+        }
+
+        System.out.println("\n===== EMPLOYEE DETAILS =====");
+
+        for (int i = 0; i < count; i++) {
+            System.out.println("Employee " + (i + 1));
+            System.out.println("Name : " + name[i]);
+            System.out.println("Age  : " + age[i]);
+            System.out.println("---------------------------");
+        }
+    }
+
+    // Raise Salary
+    static void raiseSalary() {
+
+        if (count == 0) {
+            System.out.println("No employees available.");
+            return;
+        }
+
+        System.out.print("Enter employee number: ");
+        int employee = sc.nextInt();
+
+        if (employee < 1 || employee > count) {
+            System.out.println("Invalid employee number!");
+            return;
+        }
+
+        System.out.print("Enter current salary: ");
+        salary[employee - 1] = sc.nextDouble();
+
+        System.out.print("Enter salary raise amount: ");
+        double raise = sc.nextDouble();
+
+        salary[employee - 1] += raise;
+
+        System.out.println("Salary raised successfully!");
+        System.out.println("New salary: " + salary[employee - 1]);
+    }
+}
